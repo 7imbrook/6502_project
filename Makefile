@@ -17,7 +17,7 @@ LD=$(abspath ./bin/vlink) # The linker
 CC_FLAGS=-dotdir -c02 -wdc02 -illegal
 
 # These linker flags will bring in every .ld linker script
-LD_FLAGS=$(patsubst %.ld,-T%.ld,$(wildcard *.ld))
+LD_FLAGS=$(patsubst %.ld,-T%.ld,$(wildcard *.ld)) -bbbc
 
 # This is all WIP trying to get memory layout working
 source=main.s
@@ -28,7 +28,7 @@ $(BUILD)/%.o: %.s
 	$(CC) $(CC_FLAGS) -Fvobj -o $@ $<
 
 main.bin: $(objects)
-	$(LD) $(LD_FLAGS) -bo65-02 -o $(BUILD)/$@ $^ 
+	$(LD) $(LD_FLAGS) -o $(BUILD)/$@ $^ 
 	hexdump -C $(BUILD)/main.bin
 
 # TODO: Explain the minipro writing and stuff
