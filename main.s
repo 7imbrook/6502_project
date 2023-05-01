@@ -1,9 +1,10 @@
+  .org $8000
 main:
   jmp main
 
 _start:
-; Setup the stack
-  ldx #$ff
-  tsx
-  ; jsr configure_lcd
   jmp main
+
+  .org $fffc
+  .word _start
+  .word $0000
