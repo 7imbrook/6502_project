@@ -11,15 +11,8 @@ SECTIONS
   .text ORIGIN(rom): { *(.text) } 
   .data : { *(.data) } 
   .bss :  { *(.bss)  *(COMMON) }
-  .fill : {
-    /* Pad with nop instructions */
-    FILL8(0xEA);
-    /* Move up to end of rom where reset looks for program start */
-    . = ORIGIN(rom) + 0xFFFc;
-    /* TODO put address of _start symbol at 0xFFFC */
-    BYTE(ADDR(.text._start));
-    /* Final pad */
-    FILL16(0x0000);
-    . = ORIGIN(rom) + 0xFFFF;
+  .entry 0xFFFC: {
+    SHORT(_start);
+    SHORT(0x0000);
   }
 }
