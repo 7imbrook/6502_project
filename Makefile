@@ -20,7 +20,7 @@ CC_FLAGS=-dotdir -c02 -wdc02 -illegal
 LD_FLAGS=$(patsubst %.ld,-T%.ld,$(wildcard *.ld)) -bbbc
 
 # This is all WIP trying to get memory layout working
-source=main.s
+source=$(wildcard *.s)
 objects := $(patsubst %.s,$(BUILD)/%.o,$(source))
 
 $(BUILD)/%.o: %.s
